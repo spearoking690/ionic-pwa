@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color = "primary">
+    <ion-title >Report Revisions</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="back()" fill = "outline">
+        <ion-icon size="large" slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <!--Expense Report Description-->
+  <ion-item >
+    <ion-input label="Report Description" label-placement="floating" [(ngModel)]="reportDescription"></ion-input>
+  </ion-item>
+  <!--Report Type-->
+  <ion-item>
+    <ion-input  label="Report Type" label-placement="floating" [(ngModel)]="reportType"></ion-input>
+    <ion-button (click)="udcSearch('09E','RT')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!--Business Purpose-->
+  <ion-item>
+    <ion-input label="Business purpose" label-placement="floating" [(ngModel)]="businesspurpose"></ion-input>
+    <ion-button slot="end" (click)="udcSearch('09E','RT')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <!--Currency-->
+  <ion-list>
+    <ion-radio-group value="checked">
+      <ion-item lines="none">
+        <ion-radio value="checked">Single Currency</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-radio value="unchecked">Multi Currency</ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <!--Expense End Date-->
+  <ion-item>
+    <ion-label>Report End Date</ion-label>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime" [showDefaultButtons]="true" displayFormat="DD/MM/YYYY" presentation="date"
+          name="date" [(ngModel)]="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <!--Override Manager-->
+  <ion-item>
+    <ion-input label="Override Manager" label-placement="floating" [(ngModel)]="manager"></ion-input>
+    <ion-button (click)="searchManager()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <!--Add Expenses-->
+  <ion-item-divider color = "light">
+    <ion-label>Add Expenses</ion-label>
+    <ion-button fill="solid" slot="end" (click)="addDetails()">
+      <ion-icon name="add" slot="icon-only"></ion-icon></ion-button>
+  </ion-item-divider>
+  <div class="ion-padding">
+    <ion-item-sliding *ngFor="let item of expenseList; let indexof = index" (click)="showExpense(indexof)">
+      <ion-item-options side="start">
+        <ion-item-option color="danger">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-col size="auto">{{item.expenseCategory}}</ion-col>
+        <ion-col size="auto">Location: {{item.expenseLocation}}</ion-col>
+      </ion-item>
+    </ion-item-sliding>
+  
+  </div>
+</ion-content>

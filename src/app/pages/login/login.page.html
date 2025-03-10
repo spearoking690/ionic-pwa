@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-row class="logo-row">
+    <ion-col>
+      <ion-card>
+        <!--logo-->
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <div class="center">
+    <div class="login-Header" ion padding>
+      <img class="logo-img" src="../assets/images/LoginLogo.png" />
+    </div>
+    <ion-grid>
+      <div linespace></div>
+      <ion-item transparent>
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-input type='text' [(ngModel)]="userName" placeholder="User Name"></ion-input>
+      </ion-item>
+      <ion-item transparent>
+        <ion-icon name="lock-open-outline"></ion-icon>
+        <ion-input type='password' [(ngModel)]="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <div linespace></div>
+      <ion-button expand="block" (click)="onLogin()">Sign in</ion-button>
+    </ion-grid>
+  </div>
+</ion-content>

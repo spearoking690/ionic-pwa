@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color = "primary">
+    <ion-title>UDC Search</ion-title>
+    <ion-buttons slot="end"><ion-button slot="end" (click)="back()" fill="outline">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button></ion-buttons>
+    
+  </ion-toolbar>
+
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="udcDesc" type="text" placeholder="Description"></ion-input>
+      <ion-button class="find-me" clear item-right icon-only (click)="search()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item-divider>
+      <ion-grid>
+        <ion-col style="padding-right: 90px; padding-left: 20px;"><b>ID</b></ion-col>
+        <ion-col size="auto"><b>Description</b></ion-col>
+      </ion-grid>
+    </ion-item-divider>
+
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-item (click)="getlocation(items)" *ngFor="let items of udc" padding>
+      <ion-col size="3" style=font-size:15px>
+        <b>{{items.udcKey}}</b>
+      </ion-col>
+      <ion-col size="auto" style=font-size:15px>
+        {{items.udcValue}}
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+</ion-content>

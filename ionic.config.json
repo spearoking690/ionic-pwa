@@ -1,0 +1,7 @@
+{
+  "name": "ExpenseApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

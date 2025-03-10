@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="primary">
+<ion-title>Expense Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="back()" fill = "outline">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+  <!--Expense Category-->
+  <ion-item>
+    <ion-input name="expenseCategory" label="Expense Category" label-placement="floating"
+      [(ngModel)]="expEntry.expenseCategory"></ion-input>
+    <ion-button slot="end" (click)="udcSearch('09E','EC')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!--Charge To Type-->
+  <ion-item>
+    <ion-input label="Charge To Type" label-placement="floating" [(ngModel)]="expEntry.chargeType"></ion-input>
+    <ion-button slot="end" (click)="udcSearch('09E','CT')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!--Business Unit-->
+  <ion-item>
+    <ion-input label="Business Unit" label-placement="floating" [(ngModel)]="expEntry.businessUnit"></ion-input>
+    <ion-button slot="end" (click)="buSearch()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <!--Expense Location-->
+  <ion-item>
+    <ion-input label="Expense Location" label-placement="floating" [(ngModel)]="expEntry.expenseLocation"></ion-input>
+    <ion-button slot="end" (click)="udcSearch('09E','EL')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button></ion-item>
+
+  <!--Payment Method-->
+  <ion-item>
+    <ion-input label="Payment Method" label-placement="floating" [(ngModel)]="expEntry.paymentMethod"></ion-input>
+    <ion-button slot="end" (click)="udcSearch('09E','PM')">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button></ion-item>
+
+  <!--Rate-->
+  <ion-item>
+    <ion-input label="Rate" label-placement="floating" required type="text" [(ngModel)]="expEntry.exchRate">
+    </ion-input>
+  </ion-item>
+  <!--Qty-->
+  <ion-item>
+    <ion-input label="Quantity" label-placement="floating" [(ngModel)]="expEntry.quantity">
+    </ion-input>
+  </ion-item>
+  <!--Expense Amount-->
+  <ion-item>
+    <ion-input label="Expense Amount" label-placement="floating" required type="text"
+      [(ngModel)]="expEntry.expenseAmount">
+    </ion-input>
+  </ion-item>
+  <!--Currency-->
+  <ion-item>
+    <ion-input label="Currency" label-placement="floating" [(ngModel)]="expEntry.expensecurrency">
+    </ion-input>
+  </ion-item>
+  <!--Expense Date-->
+  <ion-item>
+    <ion-label>Expense Date</ion-label>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime" [showDefaultButtons]="true" displayFormat="DD/MM/YYYY" presentation="date"
+          name="expdate" [(ngModel)]="expEntry.expenseDate"><span slot="title">Select any Date</span></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+  <ion-item-divider color="light">
+    <ion-button  slot = "end" (click)="takePhoto()">
+      <ion-icon name="add" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-label>Receipts and Attachments</ion-label>
+  </ion-item-divider>
+  <div class="ion-padding">
+    <ion-item-sliding *ngFor="let photo of photoService.photoslist; index as position">
+      <ion-item-options side="start">
+        <ion-button color="danger" (click)="photoService.deletePhoto(position)">
+          <ion-icon src="../assets/images/delpeople.svg"></ion-icon></ion-button>
+      </ion-item-options>
+      <ion-item slot="top" (click)="uploadReceipt(position)">
+        <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}"></ion-img>
+      </ion-item>
+      <ion-item-options slot="end">
+      </ion-item-options>
+    </ion-item-sliding>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-item class="ion-text-center">
+    <ion-label>
+      <ion-button shape="round" expand="full" size="default" (click)="addExpensetoList()"><ion-icon slot="start" name="add"></ion-icon>Add</ion-button>
+    </ion-label>
+        <ion-label>
+          <ion-button shape="round" expand="full" size="default" (click)="goBack()">
+            <ion-icon slot="start" name="save"></ion-icon>Save</ion-button>
+        </ion-label>
+  </ion-item>
+</ion-footer>

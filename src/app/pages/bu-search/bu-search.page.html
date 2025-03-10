@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end"><ion-button slot="end" (click)="back()" fill="outline">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button></ion-buttons>
+    <ion-title>BU Search</ion-title>
+  </ion-toolbar>
+  <ion-item>
+    <ion-input [(ngModel)]="qbeValue" placeholder="Description"></ion-input>
+    <ion-button (click)="search()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item-divider color="light">
+    <ion-grid>
+      <ion-col style="padding-right: 90px; padding-left: 20px;"><b>ID</b></ion-col>
+      <ion-col size="auto"><b>Description</b></ion-col>
+    </ion-grid>
+  </ion-item-divider>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-item (click)="getbusinessUnit(items)" *ngFor="let items of businessUnit">
+      <ion-col size="2" style=font-size:12px>
+        <b>{{items.busUnit}}</b>
+      </ion-col>
+      <ion-col size="auto" style=font-size:14px>
+        {{items.desc}}
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" [disabled]="numTimesLeft <= 0">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
